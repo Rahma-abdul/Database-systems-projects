@@ -1,0 +1,165 @@
+QUESTION 1:
+select student_name
+from student s
+join enrolled e
+on s.student_id = e.student_id
+join semester_course sc
+on e.course_code = sc.course_code and e.year =sc.year and e.quarter = sc.quarter
+where s.level = 'SR' and sc.prof_id =1
+group by student_name;
+---------------------------------------------------------------------------------------
+RESULT 1:
+
+	student_name
+	Charles Harris
+	Maria White
+
+---------------------------------------------------------------------------------------
+QUESTION 2:
+select student_name, name
+from student
+left join enrolled 
+on student.student_id = enrolled.student_id
+left join course 
+on enrolled.course_code = course.course_code;
+---------------------------------------------------------------------------------------
+RESULT 2:
+
+	student_name	name
+	Maria White	Data Structures
+	Maria White	Data Structures
+	Maria White	Archaeology of the Incas
+	Maria White	Aviation Accident Investigation
+	Charles Harris	Database Systems
+	Charles Harris	Data Structures
+	Charles Harris	Air Quality Engineering
+	Charles Harris	Operating System Design
+	Susan Martin	Operating System Design
+	Susan Martin	Archaeology of the Incas
+	Susan Martin	Database Systems
+	Joseph Thompson	Data Structures
+	Joseph Thompson	American Political Parties
+	Joseph Thompson	Social Cognition
+	Christopher Garcia	Operating System Design
+	Angela Martinez	Data Structures
+	Thomas Robinson	Database Systems
+	Thomas Robinson	Introductory Latin
+	Margaret Clark	Aviation Accident Investigation
+	Margaret Clark	Air Quality Engineering
+	Margaret Clark	Operating System Design
+	Margaret Clark	Data Structures
+	Margaret Clark	Archaeology of the Incas
+	Juan Rodriguez	Data Structures
+	Juan Rodriguez	Aviation Accident Investigation
+	Juan Rodriguez	Archaeology of the Incas
+	Dorthy Lewis	Database Systems
+	Dorthy Lewis	Data Structures
+	Dorthy Lewis	Air Quality Engineering
+	Dorthy Lewis	Introductory Latin
+	Dorthy Lewis	Aviation Accident Investigation
+	Daniel Lee	Archaeology of the Incas
+	Daniel Lee	American Political Parties
+	Daniel Lee	Data Structures
+	Daniel Lee	Air Quality Engineering
+	Daniel Lee	Introductory Latin
+	Lisa Walker	Data Structures
+	Lisa Walker	Social Cognition
+	Lisa Walker	Archaeology of the Incas
+	Lisa Walker	American Political Parties
+	Paul Hall	Operating System Design
+	Paul Hall	Data Structures
+	Paul Hall	Social Cognition
+	Nancy Allen	Aviation Accident Investigation
+	Nancy Allen	Operating System Design
+	Mark Young	Air Quality Engineering
+	Mark Young	Database Systems
+	Mark Young	Operating System Design
+	Mark Young	Aviation Accident Investigation
+	Mark Young	Data Structures
+	Luis Hernandez	Data Structures
+	Luis Hernandez	Operating System Design
+	Luis Hernandez	Data Structures
+	Luis Hernandez	Database Systems
+	Luis Hernandez	Data Structures
+	Luis Hernandez	Air Quality Engineering
+	Donald King	
+	George Wright	
+
+---------------------------------------------------------------------------------------
+QUESTION 3:
+select prof_name , count(sc.course_code) as all_courses
+from professor 
+left join semester_course sc 
+left join enrolled e
+on e.course_code = sc.course_code and e.year =sc.year and e.quarter = sc.quarter
+on sc.prof_id = professor.prof_id
+group by professor.prof_name
+having count(sc.course_code)< 5;
+---------------------------------------------------------------------------------------
+RESULT 3:
+
+	prof_name	all_courses
+	John Williams	4
+	Linda Davis	0
+	Mary Johnson	1
+	Patricia Jones	2
+	Robert Brown	0
+
+---------------------------------------------------------------------------------------
+QUESTION 4:
+select student_name
+from student s
+join enrolled e
+on s.student_id = e.student_id
+join semester_course sc
+on e.course_code = sc.course_code
+where sc.prof_id = 2
+group by s.student_name
+having count(distinct e.course_code) = 
+(select count(distinct course_code)
+from semester_course
+where prof_id = 2);
+---------------------------------------------------------------------------------------
+RESULT 4:
+
+	student_name
+	Joseph Thompson
+	Lisa Walker
+	Paul Hall
+
+---------------------------------------------------------------------------------------
+QUESTION 5:
+select p.prof_name ,p.prof_id
+from professor p
+left join semester_course sc
+on sc.prof_id = p.prof_id
+where p.dept_id = 1 or p.dept_id = 2 or p.dept_id = 3 or p.dept_id = 4
+group by p.prof_id
+having count(sc.course_code)< 2;
+---------------------------------------------------------------------------------------
+RESULT 5:
+
+	prof_name	prof_id
+	Mary Johnson	3
+	Patricia Jones	5
+	Robert Brown	7
+
+---------------------------------------------------------------------------------------
+QUESTION 6:
+select c.name ,c.course_code,p.prof_name,p.prof_id
+from professor p
+join semester_course sc
+on sc.prof_id = p.prof_id
+join course c
+on sc.course_code = c.course_code
+group by sc.course_code ,p.prof_id
+having count(c.course_code)>=2;
+---------------------------------------------------------------------------------------
+RESULT 6:
+
+	name	course_code	prof_name		prof_id
+	Data Structures	CC10	Ivana Teach		1
+	Operating System Design	CC12	Michael Miller	6
+	Air Quality Engineering	CC15	Ivana Teach	1
+---------------------------------------------------------------------------------------
+

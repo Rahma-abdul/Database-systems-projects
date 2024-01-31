@@ -1,0 +1,229 @@
+select warehouse.warehouse_id  ,warehouse.warehouse_city , count(shipment.order_id) as order_cnt
+from warehouse
+left join shipment 
+on warehouse.warehouse_id = shipment.warehouse_id 
+group by warehouse.warehouse_id  ,warehouse.warehouse_city
+order by warehouse.warehouse_id;
+----------------------------------------------------------------------
+
+warehouse_id	warehouse_city		order_cnt
+	1	Geelong				3
+	2	Grande Prairie			2
+	3	Lede				4
+	4	Oostende			3
+	5	Kumluca				4
+	6	Arica				7
+	7	Midlands			3
+	8	Aulnay-sous-Bois		7
+	9	Soria				0
+	10	Rouvroy				2
+	11	Precenicco			5
+	12	Sesto al Reghena		3
+	13	Edmundston			1
+	14	Beho				2
+	15	Aisén				4
+	16	Essex				8
+	17	Merritt				4
+	18	Ellikom				4
+	19	l'Escaillre			3
+	20	Houdemont			0
+	21	Enterprise			3
+	22	Queilén				2
+	23	Southwell			1
+	24	Recoleta			2
+	25	Panchià				5
+	26	Chichester			4
+	27	Orsara di Puglia		5
+	28	Coquitlam			3
+	29	Geertruidenberg			3
+	30	Alingsås			3
+	31	Aurora				3
+	32	Cz?stochowa			3
+	33	Cheltenham			5
+	34	Duncan				3
+	35	Les Bons Villers		2
+	36	Halifax				1
+	37	Secunderabad			4
+	38	La Baie				1
+	39	Cupar				1
+	40	Castiglione Messer Raimondo	3
+	41	Sint-Pauwels			2
+	42	Moncton				6
+	43	Martello/Martell		5
+	44	Biesme-sous-Thuin		7
+	45	Avennes				5
+	46	Bierk Bierghes			4
+	47	Purén				3
+	48	Schriek				3
+	49	St. Thomas			8
+	50	Wardha				3
+	51	Petit-Thier			4
+	52	Beerzel				0
+	53	Aurora				1
+	54	Contulmo			4
+	55	Kirriemuir			2
+	56	Burin				1
+	57	Harrogate			4
+	58	Durness				1
+	59	Whitby				5
+	60	Shipshaw			6
+
+----------------------------------------------------------------------
+select customer.customer_name , count(`order`.order_id) as order_cnt
+from customer
+left join `order` 
+on customer.customer_id = `order`.customer_id 
+group by  customer.customer_name
+order by  customer.customer_name;
+----------------------------------------------------------------------
+
+	customer_name		order_cnt
+	Addison Meadows		1
+	Alexander Wiley		1
+	Allen Howe		0
+	Althea Hebert		1
+	Amal Marsh		1
+	Angela Burnett		1
+	Anika Gonzales		2
+	April Nguyen		2
+	Asher Clayton		2
+	Bernard Drake		3
+	Brett Zimmerman		2
+	Brody Whitfield		3
+	Cade Crosby		3
+	Carly Lowe		2
+	Chadwick Hogan		2
+	Channing Lynn		2
+	Charlotte Rios		5
+	Christen Guerrero	1
+	Clarke Mccullough	3
+	Courtney Dale		4
+	Cyrus Saunders		3
+	Deanna Morales		3
+	Donna Bernard		2
+	Dora Howe		2
+	Echo Bolton		2
+	Evelyn Bowers		2
+	Farrah Gould		3
+	Fatima Page		2
+	Ferris Foley		2
+	Ferris Pollard		2
+	Garth Clements		2
+	Gemma Cote		4
+	Gil Craig		1
+	Ginger Hood		2
+	Guinevere Joyner	2
+	Harrison Heath		1
+	Hayden Weber		2
+	Hayfa Byers		1
+	Henry Bond		4
+	Hoyt Blanchard		2
+	Imani Keith		3
+	Jeanette Hester		1
+	Jennifer Coleman	1
+	Jillian Austin		0
+	Jordan Best		3
+	Josiah Hatfield		3
+	Keane Vinson		0
+	Keefe Good		5
+	Kennan Nash		2
+	Kitra Hubbard		1
+	Kristen Barber		1
+	Kylee Castro		1
+	Lane Klein		5
+	Lara Morrison		1
+	Latifah Bullock		3
+	Laurel Webster		0
+	Lilah Sanchez		1
+	Macy Holman		3
+	Madonna Foreman		2
+	Malachi Baxter		4	
+	Mara Hudson		3
+	Mariko Frederick	2
+	Mark Franks		2
+	Marvin Rich		3
+	May Reese		2
+	Melissa Valencia	0
+	Mohammad Morgan		1
+	Myra Santiago		4
+	Neville Dyer		4
+	Nita Branch		2
+	Noelle George		1
+	Patricia Quinn		2
+	Philip Cain		0
+	Piper Dominguez		2
+	Quinlan Greene		4
+	Raven Mann		1
+	Ray Cash		1
+	Regan Whitfield		3
+	Russell Benjamin	0
+	Sawyer Mejia		2
+	Stewart Tyler		2
+	Sydney Pierce		1
+	Sylvia Diaz		1
+	TaShya Walters		2
+	Todd Burt		2
+	Tyrone Sullivan		0
+	Uta Miller		2
+	Vanna Mullen		1
+	Vaughan Ellison		0
+	Veda Rasmussen		2
+	Venus Albert		3
+	Venus Townsend		4
+	Victor Mckinney		1
+	Walter Burton		4
+	Wang Browning		2
+	Wang Robertson		2
+	Xyla Hickman		3
+	Yoshio Poole		0
+	Zachery Pace		2
+	Zelda Love		2
+
+----------------------------------------------------------------------
+select item.item_id 
+from item
+where item.item_id not in(
+select item_id 
+from order_item);
+----------------------------------------------------------------------
+
+	item_id
+	3
+	5
+	9
+	10
+	14
+	16
+	24
+	28
+	34
+	42
+	51
+	55
+	56
+	73
+	75
+	78
+	80
+	81
+	84
+	88
+	89
+	92
+	94
+	99
+	109
+	116
+	121
+	132
+	147
+	156
+	161
+	177
+	179
+	180
+	181
+	185
+	190
+	199
+----------------------------------------------------------------------

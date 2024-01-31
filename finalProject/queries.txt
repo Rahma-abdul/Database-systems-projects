@@ -1,0 +1,5 @@
+INSERT into admin values('salma','elzohari','salmaelzohari@gmail.com',MD5('123'));
+INSERT into customer values(1,'salma','yousry','salmayousry@gmail.com',MD5('123'),'2002-08-29',01015643745,'46 Mohamed farid street');
+INSERT into car values("AB123",2010,'488 Spider','active',324.999,'Ferrari',"Alexandria","ferrari.jpg");
+INSERT into car values("BC223",2019,'8 Series','active',500,'BMW',"Cairo","bmw.jpg");
+INSERT into car values("CC223",2021,'s-presso','active',500,'suzuki',"Cairo","suzuki.jpg");
